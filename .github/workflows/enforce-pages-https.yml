@@ -1,0 +1,32 @@
+name: Enforce Pages HTTPS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/enforce-pages-https.yml
+
+permissions:
+  pages: write
+
+jobs:
+  enforce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable Enforce HTTPS for craftbroscorp.com
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -D /tmp/hdrs.txt -o /tmp/pages.json -w "%{http_code}" -X PUT \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pages" \
+            -d '{"cname":"craftbroscorp.com","https_enforced":true,"build_type":"legacy","source":{"branch":"main","path":"/"}}')
+          echo "HTTP ${code}"
+          grep -i x-accepted-github-permissions /tmp/hdrs.txt || true
+          cat /tmp/pages.json || true
+          echo
+          test "${code}" = "204" -o "${code}" = "200"
