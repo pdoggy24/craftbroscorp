@@ -28,7 +28,7 @@ Navigate via the header: Home · Services · About · Request a Quote.
 
 1. Visitor fills name, email, project description (required), plus optional phone,
    material/color, and quantity/size notes.
-2. **Open email draft** builds a `mailto:Pwhitehead73@gmail.com` link with subject
+2. **Open email draft** builds a `mailto:craftbros.corp@gmail.com` link with subject
    and body pre-filled from the form, then opens the visitor’s mail client.
 3. **Copy summary** copies the same text to the clipboard if mailto doesn’t work
    (e.g. no mail app configured).
@@ -41,7 +41,7 @@ Customize the destination address in `js/quote.js` (`CONTACT`) and on the About 
 
 - **Business name:** already set to **Craft Bros Corp** in header/footer/titles.
   Change the logo text in each HTML file’s `<header>` if the name changes.
-- **Email:** `Pwhitehead73@gmail.com` (About page, footer, `js/quote.js`).
+- **Email:** `craftbros.corp@gmail.com` (About page, footer, `js/quote.js`).
 - **Services copy:** items marked with a “Placeholder” badge on Home and Services.
 - **About bio:** replace the placeholder paragraph on `about.html`.
 - **Colors:** CSS variables at the top of `css/styles.css` (`--navy`, `--gold`, etc.).
